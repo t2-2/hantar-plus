@@ -1,0 +1,14 @@
+{
+“name”: “hantar-plus”,
+“private”: true,
+“version”: “1.0.0”,
+“scripts”: {
+“deploy”: “convex deploy”
+},
+“dependencies”: {
+“convex”: “^1.25.0”
+},
+“devDependencies”: {
+“convex”: “^1.25.0”
+}
+}
