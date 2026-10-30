@@ -56,26 +56,4 @@ export default defineSchema({
     reason: v.optional(v.string()),
     n: v.optional(v.number()),
   }).index("by_date", ["date"]),
-});    orig: v.string(),
-    reason: v.optional(v.string()),
-    note: v.optional(v.string()),
-    at: v.number(),
-    ackAt: v.optional(v.number()), // אישור קבלה של המפקד
-  }).index("by_date", ["date"]),
-
-  // יומן אירועים (מזין את "עדכונים אחרונים" אצל המפקד)
-  events: defineTable({
-    date: v.string(),
-    ts: v.number(),
-    k: v.string(), // mark | close | ack | bulk
-    sid: v.optional(v.string()),
-    name: v.optional(v.string()),
-    st: v.optional(v.string()),
-    late: v.optional(v.boolean()),
-    eta: v.optional(v.string()),
-    time: v.optional(v.string()),
-    orig: v.optional(v.string()),
-    reason: v.optional(v.string()),
-    n: v.optional(v.number()),
-  }).index("by_date", ["date"]),
 });
