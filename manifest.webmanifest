@@ -1,0 +1,19 @@
+{
+  "name": "חנת״ר +",
+  "short_name": "חנת״ר",
+  "description": "ניהול מסדר — נוכחות, חיסורים ואיחורים",
+  "lang": "he",
+  "dir": "rtl",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFFF0",
+  "theme_color": "#FFFFF0",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
