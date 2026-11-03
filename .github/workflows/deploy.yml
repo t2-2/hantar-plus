@@ -8,25 +8,35 @@ on:
       - "convex/**"
       - "package.json"
       - "package-lock.json"
+      - "convex.json"
       - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: convex-production
+  cancel-in-progress: false
 
 jobs:
   deploy:
+    name: Deploy Convex functions
     runs-on: ubuntu-latest
-
+    timeout-minutes: 15
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Install dependencies
+      - name: Install project dependencies
         run: npm install
 
-      - name: Deploy Convex functions
-        run: npx convex deploy
+      - name: Deploy to Convex production
+        run: npx convex deploy --yes
         env:
           CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
