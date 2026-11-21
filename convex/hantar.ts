@@ -346,6 +346,29 @@ export const setMyCommanderPin = mutation({
   },
 });
 
+/* ============ מצב תחזוקה (מתג מערכתי, סיסמה נפרדת משלו) ============ */
+// דגל גלובלי אחד, לא תלוי-כיתה: כשהוא פעיל, כל מי שפותח את האפליקציה — חנת״ר,
+// מפקד, או מפקד בית הספר, בכל כיתה — רואה רק את הודעת התחזוקה. מוגן בסיסמה
+// נפרדת משלו (MAINTENANCE_PIN), לא קשורה לקודי הכיתות ולא ל-PRINCIPAL_PIN.
+const SYSTEM = "__system__";
+
+export const maintenanceStatus = query({
+  args: {},
+  handler: async (ctx) => {
+    const v = await getSetting(ctx, SYSTEM, "maintenance");
+    return { on: !!(v && v.on) };
+  },
+});
+
+export const setMaintenance = mutation({
+  args: { pin: v.string(), on: v.boolean() },
+  handler: async (ctx, { pin, on }) => {
+    const want = process.env.MAINTENANCE_PIN;
+    if (!want || !safeEq(pin, want)) throw new Error("סיסמה שגויה");
+    await setSetting(ctx, SYSTEM, "maintenance", { on, at: Date.now() });
+  },
+});
+
 /* ============ מפקד בית הספר: צפייה וניהול (אותו קוד, שני טאבים) ============ */
 
 export const schoolSnapshot = query({
